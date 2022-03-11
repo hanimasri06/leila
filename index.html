@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="parallax.min.js"></script>
+    <title>Leila Habchy</title>
+  </head>
+  <body>
+    <div class="parallax-container">
+      <div class="parallax">
+        <header class="l-header" id="header">
+          <nav class="nav bd-container">
+            <a href="#" class="nav__logo">Tasty</a>
+
+            <div class="nav__menu" id="nav-menu">
+              <ul class="nav__list">
+                <li class="nav__item">
+                  <a href="#home" class="nav__link active-link">Home</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#about" class="nav__link">About</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#services" class="nav__link">Services</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#menu" class="nav__link">Menu</a>
+                </li>
+                <li class="nav__item">
+                  <a href="#contact" class="nav__link">Contact us</a>
+                </li>
+
+                <li>
+                  <i class="bx bx-moon change-theme" id="theme-button"></i>
+                </li>
+              </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+              <i class="bx bx-menu"></i>
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="scroll-container">
+        <div class="scroll-area">
+          <img
+            src="assets/WhatsApp Image 2022-03-11 at 2.01.19 PM (1).jpeg"
+            alt=""
+            class="img-scroll"
+          />
+        </div>
+        <div class="scroll-area">
+          <img
+            src="assets/WhatsApp Image 2022-03-11 at 2.01.19 PM.jpeg"
+            alt=""
+            class="img-scroll"
+          />
+        </div>
+        <div class="scroll-area">
+          <img
+            src="assets/pexels-nadi-lindsay-4982878.jpg"
+            alt=""
+            class="img-scroll"
+          />
+        </div>
+        <div class="scroll-area">
+          <img
+            src="assets/pexels-yunus-tuğ-8120844.jpg"
+            alt=""
+            class="img-scroll"
+          />
+        </div>
+        <div class="scroll-area">
+          <img
+            src="assets/pexels-zsófia-fehér-11405127.jpg"
+            alt=""
+            class="img-scroll"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    /*==================== SHOW MENU ====================*/
+    const showMenu = (toggleId, navId) => {
+      const toggle = document.getElementById(toggleId),
+        nav = document.getElementById(navId);
+
+      // Validate that variables exist
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          // We add the show-menu class to the div tag with the nav__menu class
+          nav.classList.toggle("show-menu");
+        });
+      }
+    };
+    showMenu("nav-toggle", "nav-menu");
+
+    /*==================== REMOVE MENU MOBILE ====================*/
+    const navLink = document.querySelectorAll(".nav__link");
+
+    function linkAction() {
+      const navMenu = document.getElementById("nav-menu");
+      // When we click on each nav__link, we remove the show-menu class
+      navMenu.classList.remove("show-menu");
+    }
+    navLink.forEach((n) => n.addEventListener("click", linkAction));
+
+    /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+    const sections = document.querySelectorAll("section[id]");
+
+    function scrollActive() {
+      const scrollY = window.pageYOffset;
+
+      sections.forEach((current) => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 50;
+        sectionId = current.getAttribute("id");
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document
+            .querySelector(".nav__menu a[href*=" + sectionId + "]")
+            .classList.add("active-link");
+        } else {
+          document
+            .querySelector(".nav__menu a[href*=" + sectionId + "]")
+            .classList.remove("active-link");
+        }
+      });
+    }
+    window.addEventListener("scroll", scrollActive);
+
+    /*==================== CHANGE BACKGROUND HEADER ====================*/
+    function scrollHeader() {
+      const nav = document.getElementById("header");
+      // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
+      if (this.scrollY >= 200) nav.classList.add("scroll-header");
+      else nav.classList.remove("scroll-header");
+    }
+    window.addEventListener("scroll", scrollHeader);
+  </script>
+</html>
